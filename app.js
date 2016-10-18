@@ -1,5 +1,6 @@
 'use strict';
 
+// Global variables:
 var allNames = [
 'bag',
 'banana',
@@ -9,58 +10,56 @@ var allNames = [
 'bubblegum',
 'chair',
 'cthulhu',
-'dog-duck',
+'dog_duck',
 'dragon',
 'pen',
-'pet-sweep',
+'pet_sweep',
 'scissors',
 'shark',
 'sweep',
 'tauntaun',
 'unicorn',
 'usb',
-'water-can',
-'wine-glass'];
+'water_can',
+'wine_glass'];
 
 var allProducts = [];
+var clicks = 0;
 
+var img1 = document.getElementById('img1');
+var img2 = document.getElementById('img2');
+var img3 = document.getElementById('img3');
 
-function Product(name) {
-  this.name = name,
-  this.id = name,
-  // this.srcStr =
-  this.src = '../assets/' + name + '.jpg',
-  this.tally = 0,
-  allProducts.push(this),
+// Product functions:
+function Product(name, position) {
+  this.name = name;
+  this.id = name;
+  this.src = '../assets/' + name + '.jpg';
+  this.position = position;
+  this.tally = 0;
+  allProducts.push(this);
+}
 
-  this.assignProd = function() {
-    for (i = 0; i < allNames.length; i++) {
-
-
-    }
+function assignProd() {
+  for (var i = 0; i < allNames.length; i++) {
+    var nom = allNames[i];
+    var position = i;
+    window[nom] = new Product(nom, position);
   }
 }
 
+function randProd() {
+  var pic = Math.ceil(Math.random() * 20);
+  return allProducts[pic];
+}
 
-var bag = new Product('bag');
-var banana = new Product('banana');
-var bathroom = new Product('bathroom');
-var boots = new Product('boots');
-var breakfast = new Product('breakfast');
-var bubblegum = new Product('bubblegum');
-var chair = new Product('chair');
-var cthulhu = new Product('cthulhu');
-var dog_duck = new Product('dog-duck');
-var dragon = new Product('dragon');
-var pen = new Product('pen');
-var pet_sweep = new Product('pet-sweep');
-var scissors = new Product('scissors')
-var shark = new Product('shark');
-var sweep = new Product('sweep');
-var tauntaun = new Product('tauntaun');
-var unicorn = new Product('unicorn');
-var usb = new Product('usb');
-var water_can = new Product('water_can');
-var wine_glass = new Product('wine_glass');
+// DOM rendering functions:
+function renderMe() {
+  
+}
 
+// Do all the things functions:
+assignProd();
 console.log(allProducts);
+
+randProd();
