@@ -2,39 +2,49 @@
 
 // Global variables:
 var allNames = [
-'bag',
-'banana',
-'bathroom',
-'boots',
-'breakfast',
-'bubblegum',
-'chair',
-'cthulhu',
-'dog_duck',
-'dragon',
-'pen',
-'pet_sweep',
-'scissors',
-'shark',
-'sweep',
-'tauntaun',
-'unicorn',
-'usb',
-'water_can',
-'wine_glass'];
+  '',
+'Bag',
+'Banana',
+'Bathroom',
+'Boots',
+'Breakfast',
+'Bubblegum',
+'Chair',
+'Cthulhu',
+'Dog_Duck',
+'Dragon',
+'Pen',
+'Pet_Sweep',
+'Scissors',
+'Shark',
+'Sweep',
+'Tauntaun',
+'Unicorn',
+'USB',
+'Water_Can',
+'Wine_Glass'];
+
+var allDesc = [];
 
 var allProducts = [];
 var clicks = 0;
 
-var img1 = document.getElementById('img1');
-var img2 = document.getElementById('img2');
-var img3 = document.getElementById('img3');
+var imgLineEl = document.getElementById('imageLine');
+var img1El = document.createElement('img');
+var img2El = document.createElement('img');
+var img3El = document.createElement('img');
 
 // Product functions:
 function Product(name, position) {
-  this.name = name;
-  this.id = name;
-  this.src = '../assets/' + name + '.jpg';
+  this.name = name.toLowerCase();
+  this.id = this.name;
+  this.title = name.replace('_', ' ');
+  if (name === 'USB') {
+    this.src = 'assets/' + this.name + '.gif';
+  }
+  else {
+    this.src = 'assets/' + this.name + '.jpg';
+  }
   this.position = position;
   this.tally = 0;
   allProducts.push(this);
@@ -49,17 +59,43 @@ function assignProd() {
 }
 
 function randProd() {
-  var pic = Math.ceil(Math.random() * 20);
-  return allProducts[pic];
+  var index1 = Math.ceil(Math.random() * 20);
+  console.log('1st #: ' + index1);
+  var index2 = Math.ceil(Math.random() * 20);
+  console.log('2nd #: ' + index2);
+  var index3 = Math.ceil(Math.random() * 20);
+  console.log('3rd #: ' + index3);
+
+  if (index1 === index2 || index1 === index3 || index2 === index3) {
+    console.log('Oops!')
+    randProd();
+  }
+
+  else {
+    img1El.setAttribute('src', allProducts[index1].src);
+    img1El.setAttribute('alt', allProducts[index1].title);
+    // img1El.setAttribute('onclick', imgClick());
+    img2El.setAttribute('src', allProducts[index2].src);
+    img2El.setAttribute('alt', allProducts[index2].title);
+    img3El.setAttribute('src', allProducts[index3].src);
+    img3El.setAttribute('alt', allProducts[index3].title);
+  }
+  imgLineEl.appendChild(img1El);
+  imgLineEl.appendChild(img2El);
+  imgLineEl.appendChild(img3El);
+  console.log(img1El);
+  console.log(img2El);
+  console.log(img3El);
 }
 
-// DOM rendering functions:
-function renderMe() {
-  
-}
+// function imgClick(event) {
+//   var imgId = event.target.id;
+//   console.log(imgId);
+//   var imgAlt = event.target.alt;
+//   console.log(imgAlt);
+// }
 
 // Do all the things functions:
 assignProd();
 console.log(allProducts);
-
 randProd();
