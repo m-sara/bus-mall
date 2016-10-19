@@ -185,7 +185,14 @@ function refresh() {
 }
 
 function caption(img, product) {
-  
+  var caption = document.createElement('caption');
+  // alert(product.description);
+  caption.innerText = img.description;
+  caption.style.display = 'block';
+}
+
+function clearCaption() {
+  document.getElementById('caption').style.display = "none";
 }
 
 // Do all the things functions:
