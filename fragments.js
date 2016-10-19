@@ -18,3 +18,28 @@
 // var usb = new Product('usb');
 // var water_can = new Product('water_can');
 // var wine_glass = new Product('wine_glass');
+
+
+
+
+// function justDoIt() {
+//   while (clicks < 15) {
+//     randProd();
+//     console.log('Clicks: ' + clicks);
+//   }
+//   for (var i = 0; i < allProducts; i++) {
+//     var bulletEl = document.createElement('li');
+//     bulletEl.textContent = allProducts[i].name + ': ' + allProducts[i].tally;
+//     listEl.appendChild(bulletEl);
+//   }
+// }
+
+
+
+
+
+
+// img3El.onmouseover = function() {
+//   allDesc[3];
+// }
+// img3El.setAttribute('onclick', imgClick());

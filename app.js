@@ -1,28 +1,6 @@
 'use strict';
 
 // Global variables:
-var allNames = [
-  '',
-'Bag',
-'Banana',
-'Bathroom',
-'Boots',
-'Breakfast',
-'Bubblegum',
-'Chair',
-'Cthulhu',
-'Dog_Duck',
-'Dragon',
-'Pen',
-'Pet_Sweep',
-'Scissors',
-'Shark',
-'Sweep',
-'Tauntaun',
-'Unicorn',
-'USB',
-'Water_Can',
-'Wine_Glass'];
 
 var allDesc = [
   '',
@@ -68,14 +46,38 @@ var allDesc = [
   'Katerina Kamprani decided to create and design for all the wrong reasons. Vindictive and nasty? Or a helpful study of everyday objects? Her goal was to re- design useful objects making them uncomfortable but usable and maintain the semiotics of the original item.'
 ];
 
-var allProducts = [];
+var allNames = [
+  '',
+'Bag',
+'Banana',
+'Bathroom',
+'Boots',
+'Breakfast',
+'Bubblegum',
+'Chair',
+'Cthulhu',
+'Dog_Duck',
+'Dragon',
+'Pen',
+'Pet_Sweep',
+'Scissors',
+'Shark',
+'Sweep',
+'Tauntaun',
+'Unicorn',
+'USB',
+'Water_Can',
+'Wine_Glass'];
 
+var allProducts = [];
 var clicks = 0;
 
 var imgLineEl = document.getElementById('imageLine');
 var img1El = document.createElement('img');
 var img2El = document.createElement('img');
 var img3El = document.createElement('img');
+var scoresEl = document.getElementById('scores');
+var listEl = document.createElement('ul');
 
 // Product functions:
 function Product(name, position, i) {
@@ -97,6 +99,7 @@ function Product(name, position, i) {
 }
 
 function assignProd() {
+  clicks = 0;
   for (var i = 0; i < allNames.length; i++) {
     var nom = allNames[i];
     var position = i;
@@ -113,35 +116,78 @@ function randProd() {
   console.log('3rd #: ' + index3);
 
   if (index1 === index2 || index1 === index3 || index2 === index3) {
-    console.log('Oops!')
+    console.log('Oops!');
     randProd();
   }
 
   else {
     img1El.setAttribute('src', allProducts[index1].src);
     img1El.setAttribute('alt', allProducts[index1].title);
-    // img1El.setAttribute('onclick', imgClick());
+    img1El.setAttribute('onmouseover', caption(img1El, allProducts[index1]));
+    img1El.setAttribute('onmouseout', '');
+    img1El.addEventListener('click', imgClick);
+
     img2El.setAttribute('src', allProducts[index2].src);
     img2El.setAttribute('alt', allProducts[index2].title);
+    img2El.setAttribute('onmouseover', caption(img2El, allProducts[index2]));
+    img2El.setAttribute('onmouseout', '');
+    img2El.addEventListener('click', imgClick);
+
     img3El.setAttribute('src', allProducts[index3].src);
     img3El.setAttribute('alt', allProducts[index3].title);
+    img3El.setAttribute('onmouseover', caption(img3El, allProducts[index3]));
+    img3El.setAttribute('onmouseout', '');
+    img3El.addEventListener('click', imgClick);
   }
+
   imgLineEl.appendChild(img1El);
   imgLineEl.appendChild(img2El);
   imgLineEl.appendChild(img3El);
   console.log(img1El);
   console.log(img2El);
   console.log(img3El);
+  console.log('Clicks: ' + clicks);
+
+  if (clicks > 14) {
+    console.log(clicks);
+    img1El.removeEventListener('click', imgClick);
+    img2El.removeEventListener('click', imgClick);
+    img3El.removeEventListener('click', imgClick);
+
+    var buttonLineEl = document.getElementById('buttonLine');
+    var resetEl = document.createElement('button');
+    resetEl.innerHTML = '';
+    resetEl.textContent = 'Reset';
+    buttonLineEl.addEventListener('click', refresh);
+    buttonLineEl.appendChild(resetEl);
+    imgLineEl.appendChild(buttonLineEl);
+
+    for (var i = 0; i < allProducts; i++) {
+      var bulletEl = document.createElement('li');
+      bulletEl.textContent = allProducts[i].name + ': ' + allProducts[i].tally;
+      listEl.appendChild(bulletEl);
+    }
+  }
 }
 
-// function imgClick(event) {
-//   var imgId = event.target.id;
-//   console.log(imgId);
-//   var imgAlt = event.target.alt;
-//   console.log(imgAlt);
-// }
+function imgClick(product) {
+  var imgId = product.target.id;
+  console.log(imgId);
+  var imgAlt = product.target.alt;
+  console.log(imgAlt);
+  // product.target.tally++;
+  clicks++;
+  randProd();
+}
+
+function refresh() {
+  window.location.reload();
+}
+
+function caption(img, product) {
+  
+}
 
 // Do all the things functions:
 assignProd();
-console.log(allProducts);
 randProd();
