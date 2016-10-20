@@ -73,9 +73,12 @@ var allProducts = [];
 var clicks = 0;
 
 var imgLineEl = document.getElementById('imageLine');
-var img1El = document.createElement('img');
-var img2El = document.createElement('img');
-var img3El = document.createElement('img');
+var img1El = document.getElementById('img1');
+var cap1El = document.getElementById('cap1');
+var img2El = document.getElementById('img2');
+var cap2El = document.getElementById('cap2');
+var img3El = document.getElementById('img3');
+var cap3El = document.getElementById('cap3');
 var scoresEl = document.getElementById('scores');
 var listEl = document.createElement('ul');
 
@@ -123,26 +126,29 @@ function randProd() {
   else {
     img1El.setAttribute('src', allProducts[index1].src);
     img1El.setAttribute('alt', allProducts[index1].title);
-    img1El.setAttribute('onmouseover', caption(img1El, allProducts[index1]));
-    img1El.setAttribute('onmouseout', '');
-    img1El.addEventListener('click', imgClick);
+    img1El.setAttribute('onmouseover', caption(cap1));
+    img1El.setAttribute('onmouseout', clearCaption(cap1));
+    img1El.addEventListener('click', function(){imgClick(index1);});
+    cap1El.textContent = allDesc[index1];
 
     img2El.setAttribute('src', allProducts[index2].src);
     img2El.setAttribute('alt', allProducts[index2].title);
-    img2El.setAttribute('onmouseover', caption(img2El, allProducts[index2]));
-    img2El.setAttribute('onmouseout', '');
-    img2El.addEventListener('click', imgClick);
+    img2El.setAttribute('onmouseover', caption(cap2));
+    img2El.setAttribute('onmouseout', clearCaption(cap2));
+    img2El.addEventListener('click', function(){imgClick(index2);});
+    cap2El.textContent = allDesc[index2];
 
     img3El.setAttribute('src', allProducts[index3].src);
     img3El.setAttribute('alt', allProducts[index3].title);
-    img3El.setAttribute('onmouseover', caption(img3El, allProducts[index3]));
-    img3El.setAttribute('onmouseout', '');
-    img3El.addEventListener('click', imgClick);
+    img3El.setAttribute('onmouseover', caption(cap3));
+    img3El.setAttribute('onmouseout', clearCaption(cap3));
+    img3El.addEventListener('click', function(){imgClick(index3);});
+    cap3El.textContent = allDesc[index3];
   }
 
-  imgLineEl.appendChild(img1El);
-  imgLineEl.appendChild(img2El);
-  imgLineEl.appendChild(img3El);
+  // imgLineEl.appendChild(img1El);
+  // imgLineEl.appendChild(img2El);
+  // imgLineEl.appendChild(img3El);
   console.log(img1El);
   console.log(img2El);
   console.log(img3El);
@@ -166,16 +172,14 @@ function randProd() {
       var bulletEl = document.createElement('li');
       bulletEl.textContent = allProducts[i].name + ': ' + allProducts[i].tally;
       listEl.appendChild(bulletEl);
+      scoresEl.appendChild(listEl);
     }
   }
 }
 
-function imgClick(product) {
-  var imgId = product.target.id;
-  console.log(imgId);
-  var imgAlt = product.target.alt;
-  console.log(imgAlt);
-  // product.target.tally++;
+function imgClick(index) {
+  allProducts[index].tally++;
+  console.log(allProducts[index].name + ' tally: ' + allProducts[index].tally)
   clicks++;
   randProd();
 }
@@ -184,15 +188,12 @@ function refresh() {
   window.location.reload();
 }
 
-function caption(img, product) {
-  var caption = document.createElement('caption');
-  // alert(product.description);
-  caption.innerText = img.description;
-  caption.style.display = 'block';
+function caption(id) {
+  id.style.visibility = 'visible';
 }
 
-function clearCaption() {
-  document.getElementById('caption').style.display = "none";
+function clearCaption(id) {
+  id.style.visibility = 'hidden';
 }
 
 // Do all the things functions:

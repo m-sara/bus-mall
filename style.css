@@ -20,11 +20,59 @@ hr {
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
 }
 
+span {
+  text-align: left;
+  width: 30%;
+}
+
 img {
   border: 8px solid black;
   margin: 10px;
 }
 
-/*img:hover {
-  content:
+.please {
+  font-family: 'Abhaya Libre';
+  font-style: italic;
+  font-variant-caps: all-small-caps;
+  font-size: 25px;
+  letter-spacing: 2px;
+  /*text-align: left;*/
+  /*margin-left: 15%;*/
+}
+
+#cap1 {
+  visibility: hidden;
+  color: white;
+  font-size: 15px;
+  position: absolute;
+  vertical-align: middle;
+  text-align: center;
+}
+
+#cap2 {
+  visibility: hidden;
+  color: white;
+  font-size: 15px;
+  position: absolute;
+  vertical-align: middle;
+  text-align: center;
+}
+
+#cap3 {
+  visibility: hidden;
+  color: white;
+  font-size: 15px;
+  position: absolute;
+  vertical-align: middle;
+  text-align: center;
+}
+
+/*img:hover .cap {
+  visibility: visible;
 }*/
+
+img:hover {
+  -webkit-filter: grayscale(50%) blur(3px);
+	filter: grayscale(50%) blur(3px);
+  opacity: 0.3;
+}
