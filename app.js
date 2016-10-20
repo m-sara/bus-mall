@@ -1,7 +1,6 @@
 'use strict';
 
 // Global variables:
-
 var allDesc = [
   '',
   // Bag
@@ -71,6 +70,9 @@ var allNames = [
 
 var allProducts = [];
 var clicks = 0;
+var index1;
+var index2;
+var index3;
 
 var imgLineEl = document.getElementById('imageLine');
 var img1El = document.getElementById('img1');
@@ -79,8 +81,12 @@ var img2El = document.getElementById('img2');
 var cap2El = document.getElementById('cap2');
 var img3El = document.getElementById('img3');
 var cap3El = document.getElementById('cap3');
+var buttonLineEl = document.getElementById('buttonLine');
+var resetEl = document.getElementById('reset');
 var scoresEl = document.getElementById('scores');
 var listEl = document.createElement('ul');
+
+resetEl.style.display = 'none';
 
 // Product functions:
 function Product(name, position, i) {
@@ -89,8 +95,6 @@ function Product(name, position, i) {
   this.title = name.replace('_', ' ');
   if (name === 'USB') {
     this.src = 'assets/' + this.name + '.gif';
-    //TODO make this loop!
-    // this.class = 'loop';
   }
   else {
     this.src = 'assets/' + this.name + '.jpg';
@@ -102,7 +106,6 @@ function Product(name, position, i) {
 }
 
 function assignProd() {
-  clicks = 0;
   for (var i = 0; i < allNames.length; i++) {
     var nom = allNames[i];
     var position = i;
@@ -111,81 +114,84 @@ function assignProd() {
 }
 
 function randProd() {
-  var index1 = Math.ceil(Math.random() * 20);
-  console.log('1st #: ' + index1);
-  var index2 = Math.ceil(Math.random() * 20);
-  console.log('2nd #: ' + index2);
-  var index3 = Math.ceil(Math.random() * 20);
-  console.log('3rd #: ' + index3);
+  index1 = Math.ceil(Math.random() * 20);
+  // console.log('1st #: ' + index1);
+  index2 = Math.ceil(Math.random() * 20);
+  // console.log('2nd #: ' + index2);
+  index3 = Math.ceil(Math.random() * 20);
+  // console.log('3rd #: ' + index3);
 
   if (index1 === index2 || index1 === index3 || index2 === index3) {
-    console.log('Oops!');
+    // console.log('Oops!');
     randProd();
   }
 
-  else {
-    img1El.setAttribute('src', allProducts[index1].src);
-    img1El.setAttribute('alt', allProducts[index1].title);
-    img1El.setAttribute('onmouseover', caption(cap1));
-    img1El.setAttribute('onmouseout', clearCaption(cap1));
-    img1El.addEventListener('click', function(){imgClick(index1);});
-    cap1El.textContent = allDesc[index1];
+  img1El.setAttribute('src', allProducts[index1].src);
+  img1El.setAttribute('alt', allProducts[index1].title);
 
-    img2El.setAttribute('src', allProducts[index2].src);
-    img2El.setAttribute('alt', allProducts[index2].title);
-    img2El.setAttribute('onmouseover', caption(cap2));
-    img2El.setAttribute('onmouseout', clearCaption(cap2));
-    img2El.addEventListener('click', function(){imgClick(index2);});
-    cap2El.textContent = allDesc[index2];
+  img2El.setAttribute('src', allProducts[index2].src);
+  img2El.setAttribute('alt', allProducts[index2].title);
 
-    img3El.setAttribute('src', allProducts[index3].src);
-    img3El.setAttribute('alt', allProducts[index3].title);
-    img3El.setAttribute('onmouseover', caption(cap3));
-    img3El.setAttribute('onmouseout', clearCaption(cap3));
-    img3El.addEventListener('click', function(){imgClick(index3);});
-    cap3El.textContent = allDesc[index3];
-  }
+  img3El.setAttribute('src', allProducts[index3].src);
+  img3El.setAttribute('alt', allProducts[index3].title);
 
-  // imgLineEl.appendChild(img1El);
-  // imgLineEl.appendChild(img2El);
-  // imgLineEl.appendChild(img3El);
+}
+
+function setClicker() {
+
+  img1El.addEventListener('click', function(){imgClick(index1);});
+  cap1El.textContent = allDesc[index1];
+
+  img2El.addEventListener('click', function(){imgClick(index2);});
+  cap2El.textContent = allDesc[index2];
+
+  img3El.addEventListener('click', function(){imgClick(index3);});
+  cap3El.textContent = allDesc[index3];
+
   console.log(img1El);
   console.log(img2El);
   console.log(img3El);
-  console.log('Clicks: ' + clicks);
+}
 
-  if (clicks > 14) {
-    console.log(clicks);
-    img1El.removeEventListener('click', imgClick);
-    img2El.removeEventListener('click', imgClick);
-    img3El.removeEventListener('click', imgClick);
 
-    var buttonLineEl = document.getElementById('buttonLine');
-    var resetEl = document.createElement('button');
-    resetEl.innerHTML = '';
-    resetEl.textContent = 'Reset';
-    buttonLineEl.addEventListener('click', refresh);
-    buttonLineEl.appendChild(resetEl);
-    imgLineEl.appendChild(buttonLineEl);
+function showTallies() {
 
-    for (var i = 0; i < allProducts; i++) {
-      var bulletEl = document.createElement('li');
-      bulletEl.textContent = allProducts[i].name + ': ' + allProducts[i].tally;
-      listEl.appendChild(bulletEl);
-      scoresEl.appendChild(listEl);
-    }
+  resetEl.style.display = 'inline-block';
+
+  resetEl.addEventListener('click', refresh);
+  buttonLineEl.appendChild(resetEl);
+  imgLineEl.appendChild(buttonLineEl);
+
+  for (var i = 0; i < allProducts; i++) {
+    var bulletEl = document.createElement('li');
+    bulletEl.textContent = allProducts[i].name + ': ' + allProducts[i].tally;
+    listEl.appendChild(bulletEl);
+    scoresEl.appendChild(listEl);
   }
 }
 
 function imgClick(index) {
-  allProducts[index].tally++;
-  console.log(allProducts[index].name + ' tally: ' + allProducts[index].tally)
-  clicks++;
-  randProd();
+
+  if (clicks > 14) {
+    console.log(clicks);
+    img1El.removeEventListener('click', function(){imgClick(index1);});
+    img2El.removeEventListener('click', function(){imgClick(index2);});
+    img3El.removeEventListener('click', function(){imgClick(index3);});
+    showTallies();
+  }
+  else {
+    clicks++;
+    console.log('Clicks: ' + clicks);
+    allProducts[index].tally++;
+    console.log(allProducts[index].name + ' tally: ' + allProducts[index].tally)
+    randProd();
+  }
 }
 
 function refresh() {
+  clicks = 0;
   window.location.reload();
+
 }
 
 function caption(id) {
@@ -199,3 +205,4 @@ function clearCaption(id) {
 // Do all the things functions:
 assignProd();
 randProd();
+setClicker();

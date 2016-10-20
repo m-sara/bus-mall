@@ -43,3 +43,26 @@
 //   allDesc[3];
 // }
 // img3El.setAttribute('onclick', imgClick());
+
+
+
+Product{}>>
+
+//TODO make this loop!
+// this.class = 'loop';
+
+setClicker>>
+
+  // img1El.setAttribute('onmouseover', caption(cap1));
+  // img1El.setAttribute('onmouseout', clearCaption(cap1));
+
+  // img2El.setAttribute('onmouseover', caption(cap2));
+  // img2El.setAttribute('onmouseout', clearCaption(cap2));
+
+  // img3El.setAttribute('onmouseover', caption(cap3));
+  // img3El.setAttribute('onmouseout', clearCaption(cap3));
+
+
+  // imgLineEl.appendChild(img1El);
+  // imgLineEl.appendChild(img2El);
+  // imgLineEl.appendChild(img3El);
