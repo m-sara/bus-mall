@@ -74,6 +74,7 @@ var index1;
 var index2;
 var index3;
 
+var bodyEl = document.getElementById('body');
 var imgLineEl = document.getElementById('imageLine');
 var img1El = document.getElementById('img1');
 var cap1El = document.getElementById('cap1');
@@ -85,8 +86,13 @@ var buttonLineEl = document.getElementById('buttonLine');
 var resetEl = document.getElementById('reset');
 var scoresEl = document.getElementById('scores');
 var listEl = document.createElement('ul');
+var seeThisEl = document.getElementById('seeThis');
+var lookAListEl = document.getElementById('lookAList');
+var lookAGraphEl = document.getElementById('lookAGraph');
 
 resetEl.style.display = 'none';
+seeThisEl.style.display = 'none';
+lookAGraphEl.style.display = 'none';
 
 // Product functions:
 function Product(name, position, i) {
@@ -153,32 +159,20 @@ function setClicker() {
   console.log(img3El);
 }
 
-
-function showTallies() {
-
-  resetEl.style.display = 'inline-block';
-
-  resetEl.addEventListener('click', refresh);
-  buttonLineEl.appendChild(resetEl);
-  imgLineEl.appendChild(buttonLineEl);
-
-  for (var i = 0; i < allProducts; i++) {
-    var bulletEl = document.createElement('li');
-    bulletEl.textContent = allProducts[i].name + ': ' + allProducts[i].tally;
-    listEl.appendChild(bulletEl);
-    scoresEl.appendChild(listEl);
-  }
-}
-
 function imgClick(index) {
 
-  if (clicks > 14) {
-    console.log(clicks);
-    img1El.removeEventListener('click', function(){imgClick(index1);});
-    img2El.removeEventListener('click', function(){imgClick(index2);});
-    img3El.removeEventListener('click', function(){imgClick(index3);});
+  if (clicks === 15) {
+    img1El.removeEventListener('click', imgClick);
+    img2El.removeEventListener('click', imgClick);
+    img3El.removeEventListener('click', imgClick);
+    clicks++;
     showTallies();
   }
+
+  else if (clicks > 15) {
+    // alert('No more clicks!');
+  }
+
   else {
     clicks++;
     console.log('Clicks: ' + clicks);
@@ -188,19 +182,63 @@ function imgClick(index) {
   }
 }
 
+
 function refresh() {
   clicks = 0;
   window.location.reload();
-
 }
 
-function caption(id) {
-  id.style.visibility = 'visible';
+function showTallies() {
+
+  resetEl.style.display = 'inline-block';
+
+  resetEl.addEventListener('click', refresh);
+  buttonLineEl.appendChild(resetEl);
+  imgLineEl.appendChild(buttonLineEl);
+
+  var hereEl = document.createElement('div');
+  hereEl.textContent = 'Here\'s what you chose:';
+  // hereEl.style.display = 'inline';
+
+  scoresEl.appendChild(hereEl);
+
+  for (var i = 1; i < allProducts.length; i++) {
+    var bulletEl = document.createElement('li');
+    bulletEl.textContent = allProducts[i].title + ': ' + allProducts[i].tally;
+    listEl.appendChild(bulletEl);
+    hereEl.appendChild(listEl);
+  }
+
+  seeThisEl.style.display = 'inline-block';
+  seeThisEl.textContent = 'see this in a graph';
+  seeThisEl.addEventListener('click', seeGraph);
+  body.prependChild(seeThisEl);
 }
 
-function clearCaption(id) {
-  id.style.visibility = 'hidden';
+function seeGraph() {
+  lookAListEl.style.display = 'none';
+  lookAGraphEl.style.display = 'block';
+  seeThisEl.textContent = 'see this in a list';
+  seeThisEl.removeEventListener('click', seeGraph);
+  seeThisEl.addEventListener('click', seeList);
 }
+
+function seeList() {
+  lookAGraphEl.style.display = 'none';
+  lookAListEl.style.display = 'block';
+  seeThisEl.textContent = 'see this in a graph';
+  seeThisEl.removeEventListener('click', seeList);
+  seeThisEl.addEventListener('click', seeGraph);
+}
+
+
+// function caption(id) {
+//   id.style.visibility = 'visible';
+// }
+//
+// function clearCaption(id) {
+//   id.style.visibility = 'hidden';
+// }
 
 // Do all the things functions:
 assignProd();

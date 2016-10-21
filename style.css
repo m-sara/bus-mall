@@ -1,7 +1,7 @@
 * {
   background-color: grey;
   text-align: center;
-
+  font-family: 'Abhaya Libre';
 }
 
 header {
@@ -10,7 +10,6 @@ header {
 }
 
 h4 {
-  font-family: 'Abhaya Libre';
   font-size: 18px;
 }
 
@@ -18,6 +17,17 @@ hr {
   border: 0;
   height: 1px;
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
+ul {
+  /*display: inline;*/
+  -moz-column-count: 4;
+  -webkit-column-count: 4;
+  column-count: 4;
+  list-style: none;
+  font-size: 13pt;
+  /*text-align: left;*/
+  /*height: 20px;*/
 }
 
 span {
@@ -31,7 +41,6 @@ img {
 }
 
 .please {
-  font-family: 'Abhaya Libre';
   font-style: italic;
   font-variant-caps: all-small-caps;
   font-size: 25px;
@@ -59,14 +68,47 @@ img {
 #cap3 {
   visibility: hidden;
   color: white;
-  font-size: 15px;
+  font-size: 18px;
   position: absolute;
   vertical-align: middle;
   text-align: center;
 }
 
+/*#img1 {
+  float: left;
+}
+
+#img2 {
+  align-items: center;
+}
+
+#img3 {
+  float: right;
+}*/
+
 #reset {
   align-items: center;
+  font-size: 25px;
+  color: black;
+  background: rgba(0,0,0,0);
+  border: solid 5px black;
+  /*color: white;
+  background-color: black;*/
+  /*border-radius: 85%;*/
+  /*box-shadow: 5px 5px 5px #474747;*/
+}
+
+#scores {
+  /*width: 75%;*/
+}
+
+#seeThis {
+  align-items: center;
+  font-size: 15px;
+  color: black;
+  background: rgba(0,0,0,0);
+  border: solid 5px black;
+  padding: 10px;
 }
 
 /*img:hover .cap {
