@@ -66,3 +66,15 @@ setClicker>>
   // imgLineEl.appendChild(img1El);
   // imgLineEl.appendChild(img2El);
   // imgLineEl.appendChild(img3El);
+
+
+
+
+
+  // function caption(id) {
+  //   id.style.visibility = 'visible';
+  // }
+  //
+  // function clearCaption(id) {
+  //   id.style.visibility = 'hidden';
+  // }

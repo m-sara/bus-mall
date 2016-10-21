@@ -89,10 +89,23 @@ var listEl = document.createElement('ul');
 var seeThisEl = document.getElementById('seeThis');
 var lookAListEl = document.getElementById('lookAList');
 var lookAGraphEl = document.getElementById('lookAGraph');
+var context = document.getElementById('graph').getContext('2d');
 
-resetEl.style.display = 'none';
-seeThisEl.style.display = 'none';
-lookAGraphEl.style.display = 'none';
+var barData = {
+  labels: [],
+  datasets: [
+    { labels: 'bag',
+      data: [] },
+  ]
+};
+
+function createBarData() {
+  barData.labels = [];
+  for (var i = 1; i < allProducts.length; i++) {
+    barData.labels.push(allProducts[i].title);
+
+  }
+}
 
 // Product functions:
 function Product(name, position, i) {
@@ -134,23 +147,18 @@ function randProd() {
 
   img1El.setAttribute('src', allProducts[index1].src);
   img1El.setAttribute('alt', allProducts[index1].title);
-
   img2El.setAttribute('src', allProducts[index2].src);
   img2El.setAttribute('alt', allProducts[index2].title);
-
   img3El.setAttribute('src', allProducts[index3].src);
   img3El.setAttribute('alt', allProducts[index3].title);
-
 }
 
 function setClicker() {
 
   img1El.addEventListener('click', function(){imgClick(index1);});
   cap1El.textContent = allDesc[index1];
-
   img2El.addEventListener('click', function(){imgClick(index2);});
   cap2El.textContent = allDesc[index2];
-
   img3El.addEventListener('click', function(){imgClick(index3);});
   cap3El.textContent = allDesc[index3];
 
@@ -182,7 +190,6 @@ function imgClick(index) {
   }
 }
 
-
 function refresh() {
   clicks = 0;
   window.location.reload();
@@ -191,7 +198,6 @@ function refresh() {
 function showTallies() {
 
   resetEl.style.display = 'inline-block';
-
   resetEl.addEventListener('click', refresh);
   buttonLineEl.appendChild(resetEl);
   imgLineEl.appendChild(buttonLineEl);
@@ -199,7 +205,6 @@ function showTallies() {
   var hereEl = document.createElement('div');
   hereEl.textContent = 'Here\'s what you chose:';
   // hereEl.style.display = 'inline';
-
   scoresEl.appendChild(hereEl);
 
   for (var i = 1; i < allProducts.length; i++) {
@@ -212,12 +217,18 @@ function showTallies() {
   seeThisEl.style.display = 'inline-block';
   seeThisEl.textContent = 'see this in a graph';
   seeThisEl.addEventListener('click', seeGraph);
-  body.prependChild(seeThisEl);
 }
 
+
+
+
+
+
+
 function seeGraph() {
+  createBarData();
   lookAListEl.style.display = 'none';
-  lookAGraphEl.style.display = 'block';
+  lookAGraphEl.style.display = 'inline-block';
   seeThisEl.textContent = 'see this in a list';
   seeThisEl.removeEventListener('click', seeGraph);
   seeThisEl.addEventListener('click', seeList);
@@ -232,15 +243,18 @@ function seeList() {
 }
 
 
-// function caption(id) {
-//   id.style.visibility = 'visible';
-// }
-//
-// function clearCaption(id) {
-//   id.style.visibility = 'hidden';
-// }
+var tallyGraph = new Chart(context, {
+  type: 'bar',
+  data: barData
+});
+
+
 
 // Do all the things functions:
+resetEl.style.display = 'none';
+seeThisEl.style.display = 'none';
+lookAGraphEl.style.display = 'none';
+
 assignProd();
 randProd();
 setClicker();

@@ -31,15 +31,18 @@
     <hr><br>
 
 
-      <div id="buttonLine"><button id="reset">reset</button></div><br>
+    <div id="buttonLine"><button id="reset">reset</button></div><br>
 
     <div id="lookAList">
       <div id="scores"></div>
     </div>
 
     <div id="lookAGraph">
-      <div id="scoresGraph"></div>
-      <!-- <div id="switchLine"><button id="seeThis"></button></div> -->
+      <div id="scoresGraph">
+        <canvas id="graph" width="300px">
+          <script src="node_modules/chart.js/dist/Chart.js"></script>
+        </canvas>
+      </div>
     </div>
 
     <div id="switchLine"><button id="seeThis"></button></div>
