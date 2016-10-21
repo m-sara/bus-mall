@@ -104,7 +104,10 @@ function createBarData() {
     tallyGraph.data.labels.push(allProducts[i].title);
     tallies.push(allProducts[i].tally);
   }
+  tallyGraph.update();
 }
+
+
 
 var tallyGraph = new Chart(context, {
   type: 'bar',
@@ -112,15 +115,16 @@ var tallyGraph = new Chart(context, {
     labels: [],
     datasets: [{
       label: 'Clicks',
-      data: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+      data: tallies,
       backgroundColor: 'rgba(0, 0, 0, 0.1)',
       borderColor: 'rgba(0, 0, 0)',
     }]
   },
-
-  responsive: true,
-  maintainAspectRatio: true,
-  scaleBeginAtZero: true,
+  // options: {
+  //   responsive: true,
+  //   maintainAspectRatio: true,
+  //   scaleBeginAtZero: true,
+  // }
 });
 
 // Product functions:
