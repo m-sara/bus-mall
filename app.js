@@ -92,8 +92,8 @@ var seeThisEl = document.getElementById('seeThis');
 var lookAListEl = document.getElementById('lookAList');
 var lookAGraphEl = document.getElementById('lookAGraph');
 var context = document.getElementById('canvas').getContext('2d');
-context.canvas.width = 50;
-context.canvas.height = 50;
+// context.canvas.width = 50;
+// context.canvas.height = 50;
 
 
 
@@ -113,11 +113,14 @@ var tallyGraph = new Chart(context, {
     datasets: [{
       label: 'Clicks',
       data: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+      backgroundColor: 'rgba(0, 0, 0, 0.1)',
+      borderColor: 'rgba(0, 0, 0)',
     }]
   },
+
   responsive: true,
   maintainAspectRatio: true,
-  scaleBeginAtZero: true
+  scaleBeginAtZero: true,
 });
 
 // Product functions:
@@ -270,3 +273,4 @@ lookAGraphEl.style.display = 'none';
 assignProd();
 randProd();
 setClicker();
+// tallyGraph.update();
