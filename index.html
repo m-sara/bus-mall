@@ -3,16 +3,49 @@
 
   <head>
     <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Abhaya+Libre" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <title>Bus Mall</title>
+    <title>BusMall</title>
 
-    <header></header>
+    <header>BusMall</header>
+    <h4>squeeze in and shop a while</h4>
+    <hr><br><br>
 
   </head>
 
   <body>
 
-    <div id="imageLine" style="display:inline-block;"></div>
+    <div class="please">Please click on the product you would like:</div><br>
+
+    <div id="imageLine" style="display:inline-block">
+      <img id="img1">
+      <img id="img2">
+      <img id="img3">
+    </div><br>
+
+    <div id="capLine">
+      <p class="cap" id="cap1"></p>
+      <p class="cap" id="cap2"></p>
+      <p class="cap" id="cap3"><br><br></p>
+    </div>
+    <hr><br>
+
+
+    <div id="buttonLine"><button id="reset">reset</button></div><br>
+
+    <div id="lookAList">
+      <div id="scores"></div>
+    </div>
+
+    <div id="lookAGraph">
+      <div id="scoresGraph">
+        <canvas id="graph" width="300px">
+          <script src="node_modules/chart.js/dist/Chart.js"></script>
+        </canvas>
+      </div>
+    </div>
+
+    <div id="switchLine"><button id="seeThis"></button></div>
 
     <script src="app.js"></script>
 
