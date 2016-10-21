@@ -74,6 +74,8 @@ var index1;
 var index2;
 var index3;
 
+var tallies = [];
+
 var bodyEl = document.getElementById('body');
 var imgLineEl = document.getElementById('imageLine');
 var img1El = document.getElementById('img1');
@@ -89,23 +91,34 @@ var listEl = document.createElement('ul');
 var seeThisEl = document.getElementById('seeThis');
 var lookAListEl = document.getElementById('lookAList');
 var lookAGraphEl = document.getElementById('lookAGraph');
-var context = document.getElementById('graph').getContext('2d');
+var context = document.getElementById('canvas').getContext('2d');
+context.canvas.width = 50;
+context.canvas.height = 50;
 
-var barData = {
-  labels: [],
-  datasets: [
-    { labels: 'bag',
-      data: [] },
-  ]
-};
+
+
 
 function createBarData() {
-  barData.labels = [];
+  // barData.labels = [];
   for (var i = 1; i < allProducts.length; i++) {
-    barData.labels.push(allProducts[i].title);
-
+    tallyGraph.data.labels.push(allProducts[i].title);
+    tallies.push(allProducts[i].tally);
   }
 }
+
+var tallyGraph = new Chart(context, {
+  type: 'bar',
+  data: {
+    labels: [],
+    datasets: [{
+      label: 'Clicks',
+      data: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    }]
+  },
+  responsive: true,
+  maintainAspectRatio: true,
+  scaleBeginAtZero: true
+});
 
 // Product functions:
 function Product(name, position, i) {
@@ -243,10 +256,9 @@ function seeList() {
 }
 
 
-var tallyGraph = new Chart(context, {
-  type: 'bar',
-  data: barData
-});
+
+
+
 
 
 
