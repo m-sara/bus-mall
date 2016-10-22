@@ -76,6 +76,7 @@ var index3;
 
 var tallies = [];
 
+
 var bodyEl = document.getElementById('body');
 var imgLineEl = document.getElementById('imageLine');
 var img1El = document.getElementById('img1');
@@ -92,8 +93,8 @@ var seeThisEl = document.getElementById('seeThis');
 var lookAListEl = document.getElementById('lookAList');
 var lookAGraphEl = document.getElementById('lookAGraph');
 var context = document.getElementById('canvas').getContext('2d');
-context.canvas.width = 50;
-context.canvas.height = 50;
+// context.canvas.width = 50;
+// context.canvas.height = 50;
 
 
 
@@ -104,7 +105,10 @@ function createBarData() {
     tallyGraph.data.labels.push(allProducts[i].title);
     tallies.push(allProducts[i].tally);
   }
+  tallyGraph.update();
 }
+
+
 
 var tallyGraph = new Chart(context, {
   type: 'bar',
@@ -112,12 +116,23 @@ var tallyGraph = new Chart(context, {
     labels: [],
     datasets: [{
       label: 'Clicks',
-      data: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-    }]
+      data: tallies,
+      backgroundColor: 'rgba(0, 0, 0, .3)'
+    }],
   },
-  responsive: true,
-  maintainAspectRatio: true,
-  scaleBeginAtZero: true
+  options: {
+    responsive: true,
+    maintainAspectRatio: true,
+    scaleBeginAtZero: true,
+    // scaleFontColor: 'rgba(0, 0, 0, .3)',
+    scales: {
+      yAxes: [{
+        ticks: {
+          stepSize: 1
+        }
+      }]
+    }
+  }
 });
 
 // Product functions:
@@ -256,17 +271,13 @@ function seeList() {
 }
 
 
-
-
-
-
-
-
 // Do all the things functions:
-resetEl.style.display = 'none';
-seeThisEl.style.display = 'none';
+
+// resetEl.style.display = 'none';
+// seeThisEl.style.display = 'none';
 lookAGraphEl.style.display = 'none';
 
 assignProd();
 randProd();
 setClicker();
+// tallyGraph.update();
