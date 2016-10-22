@@ -76,7 +76,6 @@ var index3;
 
 var tallies = [];
 
-
 var bodyEl = document.getElementById('body');
 var imgLineEl = document.getElementById('imageLine');
 var img1El = document.getElementById('img1');
@@ -93,22 +92,6 @@ var seeThisEl = document.getElementById('seeThis');
 var lookAListEl = document.getElementById('lookAList');
 var lookAGraphEl = document.getElementById('lookAGraph');
 var context = document.getElementById('canvas').getContext('2d');
-// context.canvas.width = 50;
-// context.canvas.height = 50;
-
-
-
-
-function createBarData() {
-  // barData.labels = [];
-  for (var i = 1; i < allProducts.length; i++) {
-    tallyGraph.data.labels.push(allProducts[i].title);
-    tallies.push(allProducts[i].tally);
-  }
-  tallyGraph.update();
-}
-
-
 
 var tallyGraph = new Chart(context, {
   type: 'bar',
@@ -134,6 +117,7 @@ var tallyGraph = new Chart(context, {
     }
   }
 });
+
 
 // Product functions:
 function Product(name, position, i) {
@@ -172,7 +156,6 @@ function randProd() {
     // console.log('Oops!');
     randProd();
   }
-
   img1El.setAttribute('src', allProducts[index1].src);
   img1El.setAttribute('alt', allProducts[index1].title);
   img2El.setAttribute('src', allProducts[index2].src);
@@ -196,7 +179,6 @@ function setClicker() {
 }
 
 function imgClick(index) {
-
   if (clicks === 15) {
     img1El.removeEventListener('click', imgClick);
     img2El.removeEventListener('click', imgClick);
@@ -204,11 +186,9 @@ function imgClick(index) {
     clicks++;
     showTallies();
   }
-
   else if (clicks > 15) {
     // alert('No more clicks!');
   }
-
   else {
     clicks++;
     console.log('Clicks: ' + clicks);
@@ -224,7 +204,6 @@ function refresh() {
 }
 
 function showTallies() {
-
   resetEl.style.display = 'inline-block';
   resetEl.addEventListener('click', refresh);
   buttonLineEl.appendChild(resetEl);
@@ -232,7 +211,6 @@ function showTallies() {
 
   var hereEl = document.createElement('div');
   hereEl.textContent = 'Here\'s what you chose:';
-  // hereEl.style.display = 'inline';
   scoresEl.appendChild(hereEl);
 
   for (var i = 1; i < allProducts.length; i++) {
@@ -241,17 +219,18 @@ function showTallies() {
     listEl.appendChild(bulletEl);
     hereEl.appendChild(listEl);
   }
-
   seeThisEl.style.display = 'inline-block';
   seeThisEl.textContent = 'see this in a graph';
   seeThisEl.addEventListener('click', seeGraph);
 }
 
-
-
-
-
-
+function createBarData() {
+  for (var i = 1; i < allProducts.length; i++) {
+    tallyGraph.data.labels.push(allProducts[i].title);
+    tallies.push(allProducts[i].tally);
+  }
+  tallyGraph.update();
+}
 
 function seeGraph() {
   createBarData();
@@ -272,12 +251,8 @@ function seeList() {
 
 
 // Do all the things functions:
-
-// resetEl.style.display = 'none';
-// seeThisEl.style.display = 'none';
 lookAGraphEl.style.display = 'none';
 
 assignProd();
 randProd();
 setClicker();
-// tallyGraph.update();
