@@ -76,6 +76,7 @@ var index3;
 
 var tallies = [];
 
+
 var bodyEl = document.getElementById('body');
 var imgLineEl = document.getElementById('imageLine');
 var img1El = document.getElementById('img1');
@@ -116,15 +117,22 @@ var tallyGraph = new Chart(context, {
     datasets: [{
       label: 'Clicks',
       data: tallies,
-      backgroundColor: 'rgba(0, 0, 0, 0.1)',
-      borderColor: 'rgba(0, 0, 0)',
-    }]
+      backgroundColor: 'rgba(0, 0, 0, .3)'
+    }],
   },
-  // options: {
-  //   responsive: true,
-  //   maintainAspectRatio: true,
-  //   scaleBeginAtZero: true,
-  // }
+  options: {
+    responsive: true,
+    maintainAspectRatio: true,
+    scaleBeginAtZero: true,
+    // scaleFontColor: 'rgba(0, 0, 0, .3)',
+    scales: {
+      yAxes: [{
+        ticks: {
+          stepSize: 1
+        }
+      }]
+    }
+  }
 });
 
 // Product functions:
@@ -263,15 +271,10 @@ function seeList() {
 }
 
 
-
-
-
-
-
-
 // Do all the things functions:
-resetEl.style.display = 'none';
-seeThisEl.style.display = 'none';
+
+// resetEl.style.display = 'none';
+// seeThisEl.style.display = 'none';
 lookAGraphEl.style.display = 'none';
 
 assignProd();

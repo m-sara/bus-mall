@@ -93,7 +93,12 @@ img {
   float: right;
 }*/
 
+/*#lookAGraph {
+  display: none;
+}*/
+
 #reset {
+  display: none;
   align-items: center;
   font-size: 25px;
   color: black;
@@ -110,6 +115,7 @@ img {
 }
 
 #seeThis {
+  display: none;
   align-items: center;
   font-size: 15px;
   color: black;
